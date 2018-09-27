@@ -7,7 +7,7 @@ namespace ClientAPI.Data.Core {
     public interface IDataRepository {
 
     }
-    public interface IDataRepository<TEntity> where TEntity : class {
+    public interface IDataRepository<TEntity> : IDataRepository where TEntity : class {
 
         Task<IEnumerable<TEntity>> GetAllAsync ();
         Task<TEntity> GetByIdAsync (int id);

@@ -13,6 +13,7 @@ namespace ClientAPI.Shared.DTOs
         public string IdentityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool IsProfileUpdated { get; set; }
         public string FullName { get => $"{ this.FirstName } { this.LastName }";}
         public ContactsDTO ContactsDTO { get; set; }
         public GoalsDTO GoalsDTO { get; set; }

@@ -22,7 +22,6 @@ namespace ClientAPI.Shared.ViewModels
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Last Name minimum length is 2")]
         public string LastName { get; set; }        
         public string IdentityId { get; set; }
-
         public void CreateMapping(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<PersonVM, Person>();       

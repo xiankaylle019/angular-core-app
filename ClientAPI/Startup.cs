@@ -36,7 +36,8 @@ namespace ClientAPI {
             services.AddDbContext<DataContext> (db => db.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
            
             services.AddTransient<IRegistration, Registration>();
-
+            services.AddTransient<IAuth, Auth>();
+            
             services.AddScoped(typeof(IPersonRepo), typeof(PersonRepo));
 
 

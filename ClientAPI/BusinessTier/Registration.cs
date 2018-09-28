@@ -29,8 +29,9 @@ namespace ClientAPI.BusinessTier
 
         public async Task<PersonDTO> Register(PersonVM person)
         {
+             //NOTE: Add this (using Microsoft.Extensions.DependencyInjection;) 
             var personRepo = _service.GetService<IPersonRepo>();
-
+            
             var user = Mapper.Map<Models.Person>(person);       
 
             var result = await personRepo.Register(user,person.Password);

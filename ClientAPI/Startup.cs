@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClientAPI.Bootstrapper;
+using ClientAPI.BusinessTier;
+using ClientAPI.BusinessTier.Contracts;
+using ClientAPI.Core.Shared.Mapping;
 using ClientAPI.DataAccessTier;
+using ClientAPI.DataAccessTier.Contracts.IRepositories;
+using ClientAPI.DataAccessTier.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +35,11 @@ namespace ClientAPI {
             
             services.AddDbContext<DataContext> (db => db.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
            
+            services.AddTransient<IRegistration, Registration>();
+
+            services.AddScoped(typeof(IPersonRepo), typeof(PersonRepo));
+
+
             services.AddIdentity<Models.ApplicationUser, IdentityRole>(
                 x => {
                                        
@@ -37,6 +47,7 @@ namespace ClientAPI {
                     x.Password.RequireLowercase = false;
                     x.Password.RequireDigit = false;
                     x.Password.RequiredLength = 4;
+                    x.Password.RequireNonAlphanumeric = false;
                     x.SignIn.RequireConfirmedEmail = false;
                     x.SignIn.RequireConfirmedPhoneNumber = false;
                 }
@@ -92,7 +103,7 @@ namespace ClientAPI {
             } else {
                 app.UseHsts();
             }
-
+            AutoMapperConfig.Execute();
             // app.UseHttpsRedirection();
             app.UseCors("AllowAll");
             app.UseStaticFiles();

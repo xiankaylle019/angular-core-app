@@ -3,7 +3,7 @@ using ClientAPI.Models;
 
 namespace ClientAPI.Shared.ViewModels
 {
-    public class ContactsVM : IMapDestination<Contacts> 
+    public class ContactsVM : BaseEntityVM, IMapDestination<Contacts> 
     {
         public string Address { get; set; }
         public string MobileNo { get; set; }
